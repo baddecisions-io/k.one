@@ -1,191 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K.ONE</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K.ONE</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(to bottom, #eaf3ff, #ffffff);
-  color: #111;
-  overflow-x: hidden;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* SOFT CLOUD GLOW BACKGROUND */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 20% 30%, rgba(180,210,255,0.4), transparent 40%),
-              radial-gradient(circle at 80% 60%, rgba(220,230,255,0.5), transparent 50%);
-  z-index: 0;
-}
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #14304a;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.25) 18%, transparent 34%),
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.18) 16%, transparent 28%),
+        linear-gradient(to bottom, #b9dcff 0%, #d6ecff 35%, #eef8ff 70%, #ffffff 100%);
+      min-height: 100vh;
+      position: relative;
+    }
 
-/* HEADER */
-.header {
-  text-align: center;
-  padding: 40px 16px 20px;
-  position: relative;
-  z-index: 2;
-}
+    a {
+      color: #2b5678;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-.header h1 {
-  margin: 0;
-  font-size: 42px;
-  letter-spacing: 6px;
-}
+    a:hover {
+      text-decoration: underline;
+    }
 
-.header .sub {
-  margin-top: 8px;
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: #666;
-}
+    .sky-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.65), transparent 38%),
+        radial-gradient(circle at 50% 100%, rgba(255,255,255,0.3), transparent 35%);
+      z-index: 0;
+    }
 
-/* PROFILE */
-.profile {
-  max-width: 420px;
-  margin: 0 auto 20px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
+    .cloud-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-.profile-box {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 12px;
-  border: 2px dashed #999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: #777;
-  background: #f5f9ff;
-}
+    .cloud {
+      position: absolute;
+      opacity: 0.8;
+      user-select: none;
+      will-change: transform;
+    }
 
-/* LINKS */
-.container {
-  max-width: 420px;
-  margin: auto;
-  padding: 0 16px 40px;
-  position: relative;
-  z-index: 2;
-}
+    .cloud img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 18px 20px rgba(80, 130, 180, 0.18));
+    }
 
-.link {
-  display: block;
-  text-align: center;
-  padding: 14px;
-  margin-bottom: 12px;
-  border: 2px solid #000;
-  background: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 13px;
-  box-shadow: 4px 4px 0 #000;
-  transition: all 0.15s ease;
-}
+    .cloud-a {
+      width: 240px;
+      top: 8%;
+      left: -18%;
+      animation: driftA 55s linear infinite;
+    }
 
-.link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 #000;
-  background: #eef5ff;
-}
+    .cloud-b {
+      width: 320px;
+      top: 22%;
+      left: -28%;
+      animation: driftB 74s linear infinite;
+      opacity: 0.72;
+    }
 
-/* MAIN CTA */
-.link.primary {
-  background: #dfeaff;
-  font-weight: bold;
-}
+    .cloud-c {
+      width: 190px;
+      top: 54%;
+      left: -20%;
+      animation: driftC 62s linear infinite;
+      opacity: 0.78;
+    }
 
-/* AUDIO */
-.audio-box {
-  margin: 18px 0;
-  padding: 14px;
-  border: 2px solid #000;
-  background: #ffffff;
-  box-shadow: 4px 4px 0 #000;
-}
+    .cloud-d {
+      width: 260px;
+      top: 70%;
+      left: -25%;
+      animation: driftD 88s linear infinite;
+      opacity: 0.66;
+    }
 
-.audio-box strong {
-  display: block;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  font-size: 12px;
-}
+    .cloud-e {
+      width: 170px;
+      top: 36%;
+      left: -14%;
+      animation: driftE 49s linear infinite;
+      opacity: 0.58;
+    }
 
-audio {
-  width: 100%;
-}
+    @keyframes driftA {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(145vw); }
+    }
 
-/* IMAGE PLACEHOLDER */
-.image-box {
-  margin-top: 18px;
-  height: 140px;
-  border: 2px dashed #aaa;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: #777;
-  background: #f5f9ff;
-}
+    @keyframes driftB {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(160vw); }
+    }
 
-/* FOOTER */
-.footer {
-  text-align: center;
-  font-size: 12px;
-  color: #666;
-  padding: 30px 0;
-}
-</style>
+    @keyframes driftC {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(150vw); }
+    }
 
+    @keyframes driftD {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(165vw); }
+    }
+
+    @keyframes driftE {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(148vw); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 30px 18px 42px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 44px;
+      letter-spacing: 6px;
+      color: #ffffff;
+      text-shadow:
+        0 2px 0 rgba(90,140,190,0.18),
+        0 10px 24px rgba(90,140,190,0.18);
+    }
+
+    .sub {
+      margin-top: 8px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #4f7090;
+      text-transform: uppercase;
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .profile-pic-wrap {
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.72);
+      border: 2px dashed rgba(77, 123, 165, 0.55);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6a85a1;
+      font-size: 12px;
+      box-shadow: 0 14px 30px rgba(104, 157, 206, 0.18);
+    }
+
+    .icon-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+
+    .icon-link {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.74);
+      border: 1.5px solid rgba(78, 124, 168, 0.3);
+      box-shadow: 0 8px 18px rgba(104, 157, 206, 0.16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b6d8d;
+      transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .icon-link svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .icon-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.95);
+      color: #2b5678;
+      text-decoration: none;
+    }
+
+    .cloud-card {
+      position: relative;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(95, 145, 190, 0.26);
+      border-radius: 42px;
+      padding: 18px 18px 20px;
+      margin-bottom: 18px;
+      box-shadow:
+        0 18px 30px rgba(93, 145, 190, 0.14),
+        inset 0 1px 0 rgba(255,255,255,0.55);
+      overflow: hidden;
+    }
+
+    .cloud-card::before,
+    .cloud-card::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,0.88);
+      border-radius: 999px;
+      z-index: -1;
+      filter: blur(0.5px);
+    }
+
+    .cloud-card::before {
+      width: 120px;
+      height: 70px;
+      top: -18px;
+      left: 34px;
+    }
+
+    .cloud-card::after {
+      width: 100px;
+      height: 58px;
+      top: -12px;
+      right: 44px;
+    }
+
+    .cloud-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #5a7da0;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .link-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .sky-link {
+      display: block;
+      text-align: center;
+      padding: 16px 14px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.92), rgba(239,247,255,0.92));
+      border: 1.5px solid rgba(95, 145, 190, 0.3);
+      box-shadow: 0 10px 20px rgba(104, 157, 206, 0.12);
+      color: #2b5678;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 1.3px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .sky-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 24px rgba(104, 157, 206, 0.18);
+      background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(245,250,255,1));
+      text-decoration: none;
+    }
+
+    .sky-link.primary {
+      background: linear-gradient(to bottom, rgba(228,241,255,0.96), rgba(214,234,255,0.96));
+    }
+
+    .track-placeholder {
+      border-radius: 30px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.88), rgba(236,246,255,0.88));
+      border: 1.5px dashed rgba(95, 145, 190, 0.4);
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #6786a3;
+      font-size: 13px;
+      padding: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .about-text {
+      line-height: 1.7;
+      color: #45617d;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #6d88a4;
+      padding-top: 10px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    }
+
+    @media (max-width: 520px) {
+      .header h1 {
+        font-size: 34px;
+        letter-spacing: 4px;
+      }
+
+      .page {
+        padding-top: 24px;
+      }
+
+      .cloud-a { width: 170px; }
+      .cloud-b { width: 220px; }
+      .cloud-c { width: 140px; }
+      .cloud-d { width: 190px; }
+      .cloud-e { width: 120px; }
+
+      .profile-pic-wrap {
+        width: 118px;
+        height: 118px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>K.ONE</h1>
-  <div class="sub">New York 🕊️</div>
-</div>
+  <div class="sky-glow"></div>
 
-<div class="profile">
-  <div class="profile-box">profile pic</div>
-</div>
-
-<div class="container">
-
-  <!-- MAIN LINK -->
-  <a class="link primary" href="https://distrokid.com/hyperfollow/konewhosfault/youre-here-2/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGno-wdZ4DUw2hczItrpJXS97poK9rY5ymWUEcGkWPQLBQXUDDPjyoGZ8tuXw8_aem_USGx5kb3wKH6q4ZaiXpyxg" target="_blank">
-    pre-save / listen
-  </a>
-
-  <!-- INSTAGRAM -->
-  <a class="link" href="https://www.instagram.com/k.oneeeeee/" target="_blank">
-    instagram
-  </a>
-
-  <!-- SOUNDCLOUD PLACEHOLDER -->
-  <div class="audio-box">
-    <strong>latest track</strong>
-    <audio controls>
-      <source src="teaser.mp3" type="audio/mpeg">
-    </audio>
+  <div class="cloud-layer" aria-hidden="true">
+    <div class="cloud cloud-a"><img src="cloud1.png" alt=""></div>
+    <div class="cloud cloud-b"><img src="cloud2.png" alt=""></div>
+    <div class="cloud cloud-c"><img src="cloud3.png" alt=""></div>
+    <div class="cloud cloud-d"><img src="cloud1.png" alt=""></div>
+    <div class="cloud cloud-e"><img src="cloud2.png" alt=""></div>
   </div>
 
-  <!-- EXTRA IMAGE -->
-  <div class="image-box">
-    artwork / visual
-  </div>
+  <main class="page">
 
-</div>
+    <section class="header">
+      <h1>K.ONE</h1>
+      <div class="sub">New York 🕊️</div>
+    </section>
 
-<div class="footer">
-  made with html & bad decisions
-</div>
+    <section class="profile">
+      <div class="profile-pic-wrap">profile pic</div>
+
+      <div class="icon-row">
+        <a href="https://www.instagram.com/k.oneeeeee/" target="_blank" class="icon-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.3" cy="6.8" r="1.2" fill="currentColor"/>
+          </svg>
+        </a>
+
+        <a href="#" class="icon-link" aria-label="SoundCloud">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 17.5h11.4a3.6 3.6 0 0 0 .2-7.2 4.7 4.7 0 0 0-9-1.2A3 3 0 0 0 5 12v5.5z"/>
+          </svg>
+        </a>
+
+        <a href="#" class="icon-link" aria-label="Bandcamp">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 17.3 8.7 6.7H21l-5.7 10.6H3z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="cloud-card">
+      <div class="cloud-title">links</div>
+      <div class="link-stack">
+        <a class="sky-link primary" href="https://distrokid.com/hyperfollow/konewhosfault/youre-here-2/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGno-wdZ4DUw2hczItrpJXS97poK9rY5ymWUEcGkWPQLBQXUDDPjyoGZ8tuXw8_aem_USGx5kb3wKH6q4ZaiXpyxg" target="_blank">
+          pre-save / listen
+        </a>
+
+        <a class="sky-link" href="https://www.instagram.com/k.oneeeeee/" target="_blank">
+          instagram
+        </a>
+      </div>
+    </section>
+
+    <section class="cloud-card">
+      <div class="cloud-title">latest track</div>
+      <div class="track-placeholder">
+        soundcloud / spotify track
+      </div>
+    </section>
+
+    <section class="cloud-card">
+      <div class="cloud-title">about</div>
+      <div class="about-text">
+        K.ONE is a New York-based DJ / producer with a bright, ethereal edge and a clean forward-facing presence.
+        This page is built as a simple release hub: one place to land, click through, and stay in the world.
+      </div>
+    </section>
+
+    <div class="footer">
+      made with html & bad decisions
+    </div>
+
+  </main>
 
 </body>
 </html>
