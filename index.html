@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K.ONE</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to bottom, #eaf3ff, #ffffff);
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* SOFT CLOUD GLOW BACKGROUND */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(180,210,255,0.4), transparent 40%),
+              radial-gradient(circle at 80% 60%, rgba(220,230,255,0.5), transparent 50%);
+  z-index: 0;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 40px 16px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 42px;
+  letter-spacing: 6px;
+}
+
+.header .sub {
+  margin-top: 8px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #666;
+}
+
+/* PROFILE */
+.profile {
+  max-width: 420px;
+  margin: 0 auto 20px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.profile-box {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 12px;
+  border: 2px dashed #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #777;
+  background: #f5f9ff;
+}
+
+/* LINKS */
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 0 16px 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.link {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 2px solid #000;
+  background: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  box-shadow: 4px 4px 0 #000;
+  transition: all 0.15s ease;
+}
+
+.link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+  background: #eef5ff;
+}
+
+/* MAIN CTA */
+.link.primary {
+  background: #dfeaff;
+  font-weight: bold;
+}
+
+/* AUDIO */
+.audio-box {
+  margin: 18px 0;
+  padding: 14px;
+  border: 2px solid #000;
+  background: #ffffff;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.audio-box strong {
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+audio {
+  width: 100%;
+}
+
+/* IMAGE PLACEHOLDER */
+.image-box {
+  margin-top: 18px;
+  height: 140px;
+  border: 2px dashed #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #777;
+  background: #f5f9ff;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  padding: 30px 0;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <h1>K.ONE</h1>
+  <div class="sub">New York 🕊️</div>
+</div>
+
+<div class="profile">
+  <div class="profile-box">profile pic</div>
+</div>
+
+<div class="container">
+
+  <!-- MAIN LINK -->
+  <a class="link primary" href="https://distrokid.com/hyperfollow/konewhosfault/youre-here-2/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGno-wdZ4DUw2hczItrpJXS97poK9rY5ymWUEcGkWPQLBQXUDDPjyoGZ8tuXw8_aem_USGx5kb3wKH6q4ZaiXpyxg" target="_blank">
+    pre-save / listen
+  </a>
+
+  <!-- INSTAGRAM -->
+  <a class="link" href="https://www.instagram.com/k.oneeeeee/" target="_blank">
+    instagram
+  </a>
+
+  <!-- SOUNDCLOUD PLACEHOLDER -->
+  <div class="audio-box">
+    <strong>latest track</strong>
+    <audio controls>
+      <source src="teaser.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- EXTRA IMAGE -->
+  <div class="image-box">
+    artwork / visual
+  </div>
+
+</div>
+
+<div class="footer">
+  made with html & bad decisions
+</div>
+
+</body>
+</html>
