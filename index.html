@@ -3,26 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>K.ONE</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
 
+:root{
+  --sky-top:#6ec1ff;
+  --sky-mid:#9fd8ff;
+  --sky-low:#dff3ff;
+  --sky-bottom:#f7fcff;
+  --ink:#163a5a;
+  --soft-ink:#4e7393;
+  --glass:rgba(255,255,255,0.42);
+  --glass-strong:rgba(255,255,255,0.62);
+  --line:rgba(29,81,122,0.16);
+  --white:#fff;
+  --shadow:rgba(57,111,158,0.14);
+  --accent:#e8f7ff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
-  color: #1c3550;
+  color: var(--ink);
   overflow-x: hidden;
-
   background:
-    radial-gradient(circle at 50% -10%, rgba(255,255,255,0.9), transparent 40%),
-    linear-gradient(to bottom, #6ec1ff 0%, #9fd8ff 35%, #dff3ff 75%, #f7fcff 100%);
+    radial-gradient(circle at 50% -10%, rgba(255,255,255,0.92), transparent 40%),
+    linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-mid) 35%, var(--sky-low) 75%, var(--sky-bottom) 100%);
+  min-height: 100vh;
+  position: relative;
 }
 
-/* CLOUDS */
+body::after {
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16), transparent 26%),
+    radial-gradient(circle at 80% 32%, rgba(255,255,255,0.18), transparent 24%),
+    radial-gradient(circle at 50% 70%, rgba(255,255,255,0.12), transparent 30%);
+  z-index: 0;
+}
+
+/* moving clouds */
 .cloud-layer {
   position: fixed;
   inset: 0;
@@ -32,238 +63,605 @@ body {
 
 .cloud {
   position: absolute;
-  opacity: 0.65;
+  opacity: 0.62;
   filter: blur(2px);
+  will-change: transform;
 }
 
 .cloud img {
   width: 100%;
   opacity: 0.85;
+  display: block;
 }
 
 .cloud1 { top:10%; left:-20%; width:260px; animation: driftLR 60s linear infinite; }
-.cloud2 { top:40%; left:-30%; width:320px; animation: driftLR 85s linear infinite; opacity:0.5; }
+.cloud2 { top:40%; left:-30%; width:320px; animation: driftLR 85s linear infinite; opacity:0.48; }
 .cloud3 { top:65%; right:-25%; width:220px; animation: driftRL 70s linear infinite; }
-.cloud4 { top:20%; right:-30%; width:300px; animation: driftRL 95s linear infinite; opacity:0.5; }
+.cloud4 { top:20%; right:-30%; width:300px; animation: driftRL 95s linear infinite; opacity:0.46; }
 
 @keyframes driftLR { to { transform: translateX(160vw); } }
 @keyframes driftRL { to { transform: translateX(-160vw); } }
 
-/* PAGE */
+/* scattered photos */
+.scatter-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.scatter {
+  position: absolute;
+  width: 135px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 16px 24px rgba(44, 96, 142, 0.14);
+  padding: 8px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  transform: rotate(var(--r));
+}
+
+.scatter img {
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius: 12px;
+}
+
+.scatter::before {
+  content:"";
+  position:absolute;
+  top:-7px;
+  left:16px;
+  width:32px;
+  height:12px;
+  background: rgba(255,255,255,0.64);
+  transform: rotate(-14deg);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.s1 { top: 120px; right: 4%; --r: 7deg; }
+.s2 { top: 520px; left: 4%; --r: -8deg; width: 120px; }
+.s3 { top: 980px; right: 7%; --r: -5deg; width: 128px; }
+.s4 { top: 1420px; left: 7%; --r: 9deg; width: 122px; }
+
 .page {
   position: relative;
-  z-index: 2;
-  max-width: 520px;
-  margin: auto;
-  padding: 60px 16px 40px; /* FIXED HEADER CLIP */
+  z-index: 3;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 42px 16px 50px;
+}
+
+.site-head {
   text-align: center;
+  margin-bottom: 26px;
 }
 
-/* HEADER */
-h1 {
+.site-head h1 {
   margin: 0;
-  font-size: 42px;
-  letter-spacing: 6px;
-  color: white;
-  line-height: 1.2;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  letter-spacing: 0.22em;
+  color: #ffffff;
+  text-shadow: 0 8px 20px rgba(52, 104, 150, 0.14);
 }
 
-.sub {
-  margin-top: 6px;
+.site-head .sub {
+  margin-top: 8px;
   font-size: 13px;
-  letter-spacing: 2px;
-  color: #eaf6ff;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #edf8ff;
 }
 
-/* PROFILE */
-.profile {
-  margin: 30px 0;
-}
-
-.profile-pic {
-  width: 120px;
-  height: 120px;
-  margin: auto;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-}
-
-/* SVG ICONS */
-.icons {
-  display:flex;
-  justify-content:center;
-  gap:16px;
-  margin-top:14px;
-}
-
-.icon {
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.6);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backdrop-filter:blur(6px);
-  transition:0.2s;
-}
-
-.icon svg {
-  width:20px;
-  height:20px;
-}
-
-.icon:hover {
-  transform:translateY(-2px);
-  background:white;
-}
-
-/* SECTIONS */
+/* glass sections */
 .section {
-  margin: 26px 0;
+  margin: 22px 0;
   padding: 20px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 34px var(--shadow);
+  border: 1px solid var(--line);
 }
 
-/* LINKS */
-.link {
+/* music license */
+.license-wrap {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.74), rgba(228,243,255,0.76));
+  border: 1.5px solid rgba(44, 96, 142, 0.18);
+  border-radius: 28px;
+  padding: 18px;
+  box-shadow: 0 20px 38px rgba(57,111,158,0.14);
+  overflow: hidden;
+}
+
+.license-wrap::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.26), transparent 22%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 34px,
+      rgba(95,145,190,0.04) 34px 35px
+    );
+  pointer-events:none;
+}
+
+.license-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.license-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--soft-ink);
+}
+
+.license-stamp {
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.66);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft-ink);
+  border: 1px solid rgba(44,96,142,0.1);
+}
+
+.license-main {
+  display:grid;
+  grid-template-columns: 160px 1fr;
+  gap: 18px;
+  align-items:start;
+  position: relative;
+  z-index: 2;
+}
+
+.license-photo {
+  position:relative;
+  border-radius: 18px;
+  overflow:hidden;
+  background: rgba(255,255,255,0.52);
+  border: 1.5px solid rgba(44,96,142,0.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+}
+
+.license-photo img {
   display:block;
-  margin:10px 0;
-  padding:14px;
-  border-radius:999px;
-  background: rgba(255,255,255,0.6);
-  font-size:13px;
-  transition:0.2s;
+  width:100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
 }
 
-.link:hover {
-  background:white;
-  transform:translateY(-2px);
+.license-badge {
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.82);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink);
 }
 
-/* TRACK */
-.track {
-  padding: 40px 20px;
-  color: #4d6c88;
+.license-info {
+  display:grid;
+  gap: 10px;
 }
 
-/* WISDOM (FIXED) */
-.wisdom-btn {
-  margin-top:10px;
-  padding:10px 16px;
-  border-radius:999px;
-  border:1px solid rgba(0,0,0,0.1);
-  background: rgba(255,255,255,0.7);
-  cursor:pointer;
-  font-family:inherit;
-  transition:0.2s;
+.license-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--ink);
 }
 
-.wisdom-btn:hover {
-  background:white;
+.license-grid {
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.info-pill {
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(44,96,142,0.1);
+  min-height: 58px;
+}
+
+.info-label {
+  display:block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6b8ba9;
+  margin-bottom: 6px;
+}
+
+.info-value {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.license-blurb {
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(44,96,142,0.1);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #355572;
+}
+
+/* socials */
+.socials {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  background: var(--glass-strong);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: #3e6689;
+  box-shadow: 0 10px 20px rgba(57,111,158,0.12);
+  border: 1px solid rgba(44,96,142,0.12);
+  backdrop-filter: blur(8px);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.social-link svg {
+  width: 22px;
+  height: 22px;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.94);
+  color: #214a70;
+  text-decoration: none;
+}
+
+/* release section */
+.release-shell {
+  position: relative;
+  border-radius: 28px;
+  padding: 16px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.72), rgba(229,243,255,0.72));
+  border: 1px solid rgba(44,96,142,0.12);
+  box-shadow: 0 20px 34px rgba(57,111,158,0.12);
+}
+
+.release-shell::before {
+  content:"RECENT RELEASE";
+  position:absolute;
+  top: -10px;
+  left: 18px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.86);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6485a3;
+  border: 1px solid rgba(44,96,142,0.1);
+}
+
+.release-shell iframe {
+  display:block;
+  width:100%;
+  border-radius: 18px !important;
+  box-shadow: 0 14px 22px rgba(57,111,158,0.08);
+}
+
+/* gimmicks */
+.gimmicks {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.gimmick {
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.34);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(44,96,142,0.1);
+  min-height: 132px;
+}
+
+.gimmick h3 {
+  margin: 0 0 10px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6889a8;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.gimmick p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #355572;
+}
+
+.sticker-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+}
+
+.sticker {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.64);
+  border: 1px solid rgba(44,96,142,0.1);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #507392;
+}
+
+.wisdom-button {
+  appearance: none;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.76);
+  box-shadow: 0 10px 20px rgba(57,111,158,0.1);
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #375d7c;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.wisdom-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.95);
 }
 
 .wisdom-box {
-  margin-top:12px;
-  font-size:13px;
-  color:#3c5c78;
-  min-height:24px;
+  margin-top: 12px;
+  min-height: 42px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #365575;
 }
 
-/* FOOTER */
 .footer {
-  margin-top:30px;
+  margin-top: 28px;
+  text-align:center;
   font-size:12px;
   color:#5c7d99;
 }
+
+/* responsive */
+@media (max-width: 760px) {
+  .gimmicks {
+    grid-template-columns: 1fr;
+  }
+
+  .scatter {
+    width: 108px !important;
+    opacity: 0.92;
+  }
+
+  .s1 { right: 2%; }
+  .s2 { left: 2%; }
+  .s3 { right: 3%; }
+  .s4 { left: 3%; }
+}
+
+@media (max-width: 580px) {
+  .page {
+    padding-top: 34px;
+  }
+
+  .license-main {
+    grid-template-columns: 1fr;
+  }
+
+  .license-photo {
+    max-width: 190px;
+    margin: 0 auto;
+  }
+
+  .license-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-head h1 {
+    letter-spacing: 0.14em;
+  }
+
+  .scatter {
+    display:none;
+  }
+}
 </style>
 </head>
-
 <body>
 
-<div class="cloud-layer">
-  <div class="cloud cloud1" data-speed="0.08"><img src="cloud1.png"></div>
-  <div class="cloud cloud2" data-speed="0.04"><img src="cloud2.png"></div>
-  <div class="cloud cloud3" data-speed="-0.05"><img src="cloud3.png"></div>
-  <div class="cloud cloud4" data-speed="-0.03"><img src="cloud1.png"></div>
+<div class="cloud-layer" aria-hidden="true">
+  <div class="cloud cloud1" data-speed="0.08"><img src="cloud1.png" alt=""></div>
+  <div class="cloud cloud2" data-speed="0.04"><img src="cloud2.png" alt=""></div>
+  <div class="cloud cloud3" data-speed="-0.05"><img src="cloud3.png" alt=""></div>
+  <div class="cloud cloud4" data-speed="-0.03"><img src="cloud1.png" alt=""></div>
 </div>
 
-<div class="page">
+<div class="scatter-layer" aria-hidden="true">
+  <div class="scatter s1"><img src="kone1.jpg" alt=""></div>
+  <div class="scatter s2"><img src="kone2.jpg" alt=""></div>
+  <div class="scatter s3"><img src="kone3.jpg" alt=""></div>
+  <div class="scatter s4"><img src="kone4.jpg" alt=""></div>
+</div>
 
-  <h1>K.ONE</h1>
-  <div class="sub">New York 🕊️</div>
+<main class="page">
 
-  <div class="profile">
-    <div class="profile-pic">profile pic</div>
+  <section class="site-head">
+    <h1>K.ONE</h1>
+    <div class="sub">New York 🕊️</div>
+  </section>
 
-    <div class="icons">
-      <a class="icon" href="https://www.instagram.com/k.oneeeeee/" target="_blank">
-        <!-- Instagram -->
+  <section class="license-wrap">
+    <div class="license-top">
+      <div class="license-title">music license</div>
+      <div class="license-stamp">active artist file</div>
+    </div>
+
+    <div class="license-main">
+      <div class="license-photo">
+        <img src="profile.jpg" alt="K.ONE profile photo">
+        <div class="license-badge">licensed</div>
+      </div>
+
+      <div class="license-info">
+        <div class="license-name">K.ONE</div>
+
+        <div class="license-grid">
+          <div class="info-pill">
+            <span class="info-label">artist type</span>
+            <span class="info-value">DJ / producer</span>
+          </div>
+
+          <div class="info-pill">
+            <span class="info-label">origin</span>
+            <span class="info-value">New York 🕊️</span>
+          </div>
+
+          <div class="info-pill">
+            <span class="info-label">genre</span>
+            <span class="info-value">[ genre placeholder ]</span>
+          </div>
+
+          <div class="info-pill">
+            <span class="info-label">status</span>
+            <span class="info-value">[ status placeholder ]</span>
+          </div>
+        </div>
+
+        <div class="license-blurb">
+          [ short artist bio placeholder ]<br>
+          [ 1–2 lines introducing K.ONE and the sound / world of the project ]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="socials">
+      <a class="social-link" href="https://soundcloud.com/k-oneee" target="_blank" aria-label="SoundCloud">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M5 17.5h11.4a3.6 3.6 0 0 0 .2-7.2 4.7 4.7 0 0 0-9-1.2A3 3 0 0 0 5 12v5.5z"/>
+        </svg>
+      </a>
+
+      <a class="social-link" href="https://www.instagram.com/k.oneeeeee" target="_blank" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="17" cy="7" r="1" fill="currentColor"/>
+          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="17.3" cy="6.8" r="1.2" fill="currentColor"/>
         </svg>
       </a>
 
-      <a class="icon" href="#">
-        <!-- SoundCloud -->
+      <a class="social-link" href="https://open.spotify.com/artist/4f15TpvwbbqszvGawHTMFt?si=h1m4F01zT4KxHXOeM3gyKQ" target="_blank" aria-label="Spotify">
         <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M5 17h11a4 4 0 0 0 0-8 5 5 0 0 0-9-1 3 3 0 0 0-2 3v6z"/>
-        </svg>
-      </a>
-
-      <a class="icon" href="#">
-        <!-- Bandcamp -->
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M3 17l6-10h12l-6 10H3z"/>
+          <path d="M12 2.3A9.7 9.7 0 1 0 21.7 12 9.7 9.7 0 0 0 12 2.3Zm4.45 13.98a.76.76 0 0 1-1.05.25 8.94 8.94 0 0 0-8.98-.53.75.75 0 1 1-.67-1.35 10.45 10.45 0 0 1 10.5.62.75.75 0 0 1 .2 1.01Zm1.5-2.7a.95.95 0 0 1-1.31.31 11.27 11.27 0 0 0-11.38-.63.95.95 0 0 1-.84-1.7 13.17 13.17 0 0 1 13.28.74.95.95 0 0 1 .25 1.28Zm.12-2.82A13.46 13.46 0 0 0 4.3 9.97a1.15 1.15 0 1 1-.94-2.1 15.77 15.77 0 0 1 15.96.93 1.15 1.15 0 1 1-1.25 1.96Z"/>
         </svg>
       </a>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <a class="link" href="https://distrokid.com/hyperfollow/konewhosfault/youre-here-2/?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank">
-      pre-save / listen
-    </a>
-  </div>
+  <section class="release-shell">
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0v7iGoCSwyDDJyyyWihkYD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </section>
 
-  <div class="section track">
-    soundcloud / spotify track
-  </div>
+  <section class="gimmicks">
+    <div class="gimmick">
+      <h3>transmission tags</h3>
+      <div class="sticker-row">
+        <div class="sticker">nyc</div>
+        <div class="sticker">ethereal</div>
+        <div class="sticker">club pressure</div>
+        <div class="sticker">y2k signal</div>
+        <div class="sticker">active file</div>
+      </div>
+    </div>
 
-  <div class="section">
-    K.ONE is a New York-based DJ / producer with a bright, ethereal edge.
-  </div>
+    <div class="gimmick">
+      <h3>status</h3>
+      <p>
+        link hub active<br>
+        recent release live<br>
+        profile file updated
+      </p>
+    </div>
 
-  <div class="section">
-    <button class="wisdom-btn" id="wisdomBtn">receive wisdom</button>
-    <div class="wisdom-box" id="wisdomBox"></div>
-  </div>
+    <div class="gimmick">
+      <h3>observations</h3>
+      <p>
+        soft visuals, bright atmosphere, clean funnel.<br>
+        built to feel more like a world than a utility page.
+      </p>
+    </div>
+
+    <div class="gimmick">
+      <h3>receive wisdom</h3>
+      <button class="wisdom-button" id="wisdomBtn" type="button">receive wisdom</button>
+      <div class="wisdom-box" id="wisdomBox"></div>
+    </div>
+  </section>
 
   <div class="footer">
     made with html & bad decisions
   </div>
 
-</div>
+</main>
 
 <script>
 const wisdom = [
-"what you remove defines the groove",
-"if unsure, mute it",
-"the loudest track is rarely the strongest",
-"perfection kills movement",
-"energy beats precision"
+  "what you remove defines the groove",
+  "if unsure, mute it",
+  "the loudest track is rarely the strongest",
+  "perfection kills movement",
+  "energy beats precision",
+  "lightness can still carry weight"
 ];
 
 document.getElementById("wisdomBtn").onclick = () => {
-  const line = wisdom[Math.floor(Math.random()*wisdom.length)];
+  const line = wisdom[Math.floor(Math.random() * wisdom.length)];
   document.getElementById("wisdomBox").innerText = line;
 };
 
