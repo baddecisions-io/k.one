@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K.ONE</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-
 <style>
 * { box-sizing: border-box; }
 
@@ -22,7 +20,6 @@
   --line:rgba(29,81,122,0.16);
   --white:#fff;
   --shadow:rgba(57,111,158,0.14);
-  --accent:#e8f7ff;
 }
 
 html {
@@ -31,7 +28,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: Circular, "Circular Std", "Circular Spotify Text", "Helvetica Neue", Arial, sans-serif;
   color: var(--ink);
   overflow-x: hidden;
   background:
@@ -93,7 +90,7 @@ body::after {
 
 .scatter {
   position: absolute;
-  width: 135px;
+  width: 180px;
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(255,255,255,0.8);
   box-shadow: 0 16px 24px rgba(44, 96, 142, 0.14);
@@ -122,10 +119,10 @@ body::after {
   border: 1px solid rgba(0,0,0,0.05);
 }
 
-.s1 { top: 120px; right: 4%; --r: 7deg; }
-.s2 { top: 520px; left: 4%; --r: -8deg; width: 120px; }
-.s3 { top: 980px; right: 7%; --r: -5deg; width: 128px; }
-.s4 { top: 1420px; left: 7%; --r: 9deg; width: 122px; }
+.s1 { top: 120px; right: 3%; --r: 7deg; }
+.s2 { top: 520px; left: 2%; --r: -8deg; width: 170px; }
+.s3 { top: 980px; right: 5%; --r: -5deg; width: 178px; }
+.s4 { top: 1420px; left: 4%; --r: 9deg; width: 172px; }
 
 .page {
   position: relative;
@@ -142,11 +139,11 @@ body::after {
 
 .site-head h1 {
   margin: 0;
-  font-family: "Space Grotesk", sans-serif;
   font-size: clamp(2.2rem, 7vw, 3.4rem);
   letter-spacing: 0.22em;
   color: #ffffff;
   text-shadow: 0 8px 20px rgba(52, 104, 150, 0.14);
+  font-weight: 700;
 }
 
 .site-head .sub {
@@ -172,8 +169,8 @@ body::after {
 .license-wrap {
   position: relative;
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.74), rgba(228,243,255,0.76));
-  border: 1.5px solid rgba(44, 96, 142, 0.18);
+    linear-gradient(135deg, rgba(255,255,255,0.82), rgba(225,238,250,0.88));
+  border: 1.5px solid rgba(56, 104, 148, 0.18);
   border-radius: 28px;
   padding: 18px;
   box-shadow: 0 20px 38px rgba(57,111,158,0.14);
@@ -185,13 +182,25 @@ body::after {
   position:absolute;
   inset:0;
   background:
-    linear-gradient(to bottom, rgba(255,255,255,0.26), transparent 22%),
+    linear-gradient(to bottom, rgba(255,255,255,0.24), transparent 22%),
     repeating-linear-gradient(
       90deg,
-      transparent 0 34px,
-      rgba(95,145,190,0.04) 34px 35px
+      transparent 0 36px,
+      rgba(95,145,190,0.04) 36px 37px
     );
   pointer-events:none;
+}
+
+.license-wrap::after {
+  content:"MUSIC LICENSE";
+  position:absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7996b2;
+  font-weight: 700;
 }
 
 .license-top {
@@ -205,22 +214,11 @@ body::after {
 }
 
 .license-title {
-  font-family: "Space Grotesk", sans-serif;
   font-size: 13px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--soft-ink);
-}
-
-.license-stamp {
-  padding: 6px 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.66);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--soft-ink);
-  border: 1px solid rgba(44,96,142,0.1);
+  font-weight: 700;
 }
 
 .license-main {
@@ -267,11 +265,11 @@ body::after {
 }
 
 .license-name {
-  font-family: "Space Grotesk", sans-serif;
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   line-height: 1;
   letter-spacing: 0.1em;
   color: var(--ink);
+  font-weight: 700;
 }
 
 .license-grid {
@@ -295,12 +293,37 @@ body::after {
   letter-spacing: 0.16em;
   color: #6b8ba9;
   margin-bottom: 6px;
+  font-weight: 700;
 }
 
 .info-value {
   font-size: 13px;
   color: var(--ink);
   line-height: 1.45;
+}
+
+.status-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+}
+
+.status-live::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #00d76f;
+  box-shadow: 0 0 10px #00d76f, 0 0 18px rgba(0, 215, 111, 0.65);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.2);
+    opacity: 0.82;
+  }
 }
 
 .license-blurb {
@@ -373,6 +396,7 @@ body::after {
   text-transform: uppercase;
   color: #6485a3;
   border: 1px solid rgba(44,96,142,0.1);
+  font-weight: 700;
 }
 
 .release-shell iframe {
@@ -382,82 +406,50 @@ body::after {
   box-shadow: 0 14px 22px rgba(57,111,158,0.08);
 }
 
-/* gimmicks */
-.gimmicks {
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+/* chart */
+.chart-shell {
+  position: relative;
+  border-radius: 28px;
+  padding: 18px 18px 14px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.64), rgba(232,245,255,0.68));
+  border: 1px solid rgba(44,96,142,0.12);
+  box-shadow: 0 20px 34px rgba(57,111,158,0.10);
 }
 
-.gimmick {
-  padding: 16px;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.34);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(44,96,142,0.1);
-  min-height: 132px;
-}
-
-.gimmick h3 {
-  margin: 0 0 10px 0;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #6889a8;
-  font-family: "Space Grotesk", sans-serif;
-}
-
-.gimmick p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.7;
-  color: #355572;
-}
-
-.sticker-row {
-  display:flex;
-  flex-wrap:wrap;
-  gap: 8px;
-}
-
-.sticker {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.64);
-  border: 1px solid rgba(44,96,142,0.1);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #507392;
-}
-
-.wisdom-button {
-  appearance: none;
-  border: none;
-  padding: 12px 16px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.76);
-  box-shadow: 0 10px 20px rgba(57,111,158,0.1);
-  font-family: inherit;
+.chart-title {
+  margin: 0 0 14px 0;
   font-size: 12px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #375d7c;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease;
+  color: #6485a3;
+  font-weight: 700;
 }
 
-.wisdom-button:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.95);
+.chart-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.36);
+  padding: 10px;
 }
 
-.wisdom-box {
-  margin-top: 12px;
-  min-height: 42px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #365575;
+.chart-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7692ad;
+  font-weight: 700;
 }
 
 .footer {
@@ -469,19 +461,15 @@ body::after {
 
 /* responsive */
 @media (max-width: 760px) {
-  .gimmicks {
-    grid-template-columns: 1fr;
-  }
-
   .scatter {
-    width: 108px !important;
+    width: 132px !important;
     opacity: 0.92;
   }
 
-  .s1 { right: 2%; }
-  .s2 { left: 2%; }
-  .s3 { right: 3%; }
-  .s4 { left: 3%; }
+  .s1 { right: 1%; }
+  .s2 { left: 1%; }
+  .s3 { right: 2%; }
+  .s4 { left: 2%; }
 }
 
 @media (max-width: 580px) {
@@ -537,14 +525,13 @@ body::after {
 
   <section class="license-wrap">
     <div class="license-top">
-      <div class="license-title">music license</div>
-      <div class="license-stamp">active artist file</div>
+      <div class="license-title">artist identification</div>
     </div>
 
     <div class="license-main">
       <div class="license-photo">
         <img src="profile.jpg" alt="K.ONE profile photo">
-        <div class="license-badge">licensed</div>
+        <div class="license-badge">verified</div>
       </div>
 
       <div class="license-info">
@@ -563,12 +550,12 @@ body::after {
 
           <div class="info-pill">
             <span class="info-label">genre</span>
-            <span class="info-value">[ genre placeholder ]</span>
+            <span class="info-value">undefined</span>
           </div>
 
           <div class="info-pill">
             <span class="info-label">status</span>
-            <span class="info-value">[ status placeholder ]</span>
+            <span class="info-value status-live">online</span>
           </div>
         </div>
 
@@ -608,39 +595,88 @@ body::after {
     <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0v7iGoCSwyDDJyyyWihkYD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </section>
 
-  <section class="gimmicks">
-    <div class="gimmick">
-      <h3>transmission tags</h3>
-      <div class="sticker-row">
-        <div class="sticker">nyc</div>
-        <div class="sticker">ethereal</div>
-        <div class="sticker">club pressure</div>
-        <div class="sticker">y2k signal</div>
-        <div class="sticker">active file</div>
-      </div>
-    </div>
+  <section class="chart-shell">
+    <h3 class="chart-title">K.ONE Growth</h3>
+    <div class="chart-wrap">
+      <svg viewBox="0 0 640 280" role="img" aria-label="K.ONE Growth chart">
+        <defs>
+          <linearGradient id="lineGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6ec1ff"/>
+            <stop offset="100%" stop-color="#1ed760"/>
+          </linearGradient>
+          <linearGradient id="fillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(30,215,96,0.35)"/>
+            <stop offset="100%" stop-color="rgba(110,193,255,0.02)"/>
+          </linearGradient>
+        </defs>
 
-    <div class="gimmick">
-      <h3>status</h3>
-      <p>
-        link hub active<br>
-        recent release live<br>
-        profile file updated
-      </p>
-    </div>
+        <!-- grid -->
+        <g opacity="0.35" stroke="#9bc4e2" stroke-width="1">
+          <line x1="54" y1="40" x2="610" y2="40"/>
+          <line x1="54" y1="90" x2="610" y2="90"/>
+          <line x1="54" y1="140" x2="610" y2="140"/>
+          <line x1="54" y1="190" x2="610" y2="190"/>
+          <line x1="54" y1="240" x2="610" y2="240"/>
+        </g>
 
-    <div class="gimmick">
-      <h3>observations</h3>
-      <p>
-        soft visuals, bright atmosphere, clean funnel.<br>
-        built to feel more like a world than a utility page.
-      </p>
-    </div>
+        <!-- axes -->
+        <g stroke="#6b94b4" stroke-width="2">
+          <line x1="54" y1="20" x2="54" y2="240"/>
+          <line x1="54" y1="240" x2="610" y2="240"/>
+        </g>
 
-    <div class="gimmick">
-      <h3>receive wisdom</h3>
-      <button class="wisdom-button" id="wisdomBtn" type="button">receive wisdom</button>
-      <div class="wisdom-box" id="wisdomBox"></div>
+        <!-- area -->
+        <path d="M54 236
+                 C110 234, 130 228, 168 224
+                 S240 210, 270 198
+                 S330 170, 372 148
+                 S430 120, 470 88
+                 S530 54, 610 24
+                 L610 240 L54 240 Z"
+              fill="rgba(30,215,96,0.16)"/>
+
+        <!-- line -->
+        <path d="M54 236
+                 C110 234, 130 228, 168 224
+                 S240 210, 270 198
+                 S330 170, 372 148
+                 S430 120, 470 88
+                 S530 54, 610 24"
+              fill="none"
+              stroke="url(#lineGrad)"
+              stroke-width="5"
+              stroke-linecap="round"/>
+
+        <!-- points -->
+        <g fill="#1ed760" stroke="#ffffff" stroke-width="3">
+          <circle cx="168" cy="224" r="6"/>
+          <circle cx="270" cy="198" r="6"/>
+          <circle cx="372" cy="148" r="6"/>
+          <circle cx="470" cy="88" r="6"/>
+          <circle cx="610" cy="24" r="7"/>
+        </g>
+
+        <!-- labels -->
+        <g fill="#6b8ba9" font-size="11" font-family="Circular, 'Circular Std', 'Helvetica Neue', Arial, sans-serif">
+          <text x="48" y="244" text-anchor="end">0</text>
+          <text x="48" y="194" text-anchor="end">25k</text>
+          <text x="48" y="144" text-anchor="end">50k</text>
+          <text x="48" y="94" text-anchor="end">75k</text>
+          <text x="48" y="44" text-anchor="end">100k</text>
+
+          <text x="54" y="262">JAN</text>
+          <text x="170" y="262">MAR</text>
+          <text x="286" y="262">MAY</text>
+          <text x="402" y="262">JUL</text>
+          <text x="518" y="262">SEP</text>
+          <text x="594" y="262">NOW</text>
+        </g>
+      </svg>
+    </div>
+    <div class="chart-labels">
+      <span>audience</span>
+      <span>streams</span>
+      <span>momentum</span>
     </div>
   </section>
 
@@ -651,20 +687,6 @@ body::after {
 </main>
 
 <script>
-const wisdom = [
-  "what you remove defines the groove",
-  "if unsure, mute it",
-  "the loudest track is rarely the strongest",
-  "perfection kills movement",
-  "energy beats precision",
-  "lightness can still carry weight"
-];
-
-document.getElementById("wisdomBtn").onclick = () => {
-  const line = wisdom[Math.floor(Math.random() * wisdom.length)];
-  document.getElementById("wisdomBox").innerText = line;
-};
-
 window.addEventListener("scroll", () => {
   const y = window.scrollY;
   document.querySelectorAll(".cloud").forEach(c => {
